@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Choose Me</string>
+    <string name="notifications">Notifications</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
+    <string name="field_req">Field required</string>
+    <string name="back">back</string>
+    <string name="inv_email">Invalid email</string>
+    <string name="pass_short">Password to short</string>
+    <string name="ch_city">Choose city</string>
+    <string name="user_password">password</string>
+    <string name="user_email">Email</string>
+    <string name="login">Login</string>
+    <string name="service_provider">Service provider</string>
+    <string name="code">code</string>
+    <string name="user_phone">Phone</string>
+    <string name="register">Register</string>
+    <string name="user_name">User name</string>
+
+</resources>
