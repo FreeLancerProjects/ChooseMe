@@ -1,21 +1,65 @@
 <resources>
     <string name="app_name">Choose Me</string>
+    <string name="home">Home</string>
     <string name="notifications">Notifications</string>
-    <string name="ok">OK</string>
+    <string name="more">More</string>
+    <string name="terms_and_conditions">Terms of use</string>
+    <string name="about_app">About</string>
+    <string name="contact_us">Contact Us</string>
+
+
+    <string name="back">Back</string>
+    <string name="failed">Failed</string>
+    <string name="something">Check internet connection</string>
+
+    <string name="language_settings">Language Settings</string>
+    <string name="sar">SAR</string>
+    <string name="no_details">No details</string>
     <string name="cancel">Cancel</string>
-    <string name="please_sign_in_or_sign_up">Please Sign In or Sign Up</string>
-    <string name="field_req">Field required</string>
-    <string name="back">back</string>
+    <string name="suc">Success !</string>
+
+
+    <string name="call">Call</string>
+    <string name="share">share</string>
+    <string name="edit">Edit</string>
+    <string name="price">Price</string>
+    <string name="delete">Delete</string>
+    <string name="change_language">Change language</string>
+    <string name="detials">Details</string>
+
+
+    <string name="send">Send</string>
+    <string name="ok">ok</string>
+    <string name="no_data_to_show">No data to show</string>
+
+    <string name="search2">Search</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="email">Email</string>
+    <string name="send_a_message">Send a message</string>
+    <string name="name">Name</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="wait">Wait...</string>
+    <string name="profile">Profile</string>
+    <string name="please_sign_in_or_sign_up">Please sign In or Sign Up</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="new_account">New Account</string>
+    <string name="skip">Skip</string>
+    <string name="service_provider">Service Provider</string>
+    <string name="code">Code</string>
+    <string name="already_have_an_account">Already have an account !</string>
+    <string name="field_required">Field Required</string>
+    <string name="pass_short">Password too short</string>
     <string name="inv_email">Invalid email</string>
-    <string name="pass_short">Password to short</string>
-    <string name="ch_city">Choose city</string>
-    <string name="user_password">password</string>
-    <string name="user_email">Email</string>
-    <string name="login">Login</string>
-    <string name="service_provider">Service provider</string>
-    <string name="code">code</string>
-    <string name="user_phone">Phone</string>
-    <string name="register">Register</string>
-    <string name="user_name">User name</string>
+    <string name="dept">Department</string>
+    <string name="ch_serv">Choose Services</string>
+    <string name="inc_em_pas">Incorrect email or Password</string>
+    <string name="depts">Departments</string>
+    <string name="settings">Settings</string>
+    <string name="all">All</string>
+    <string name="most_view">Most View</string>
+
 
 </resources>

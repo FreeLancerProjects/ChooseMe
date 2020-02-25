@@ -39,27 +39,12 @@ public class Fragment_Language extends Fragment {
         activity = (SignInActivity) getActivity();
         Paper.init(activity);
 
-        binding.rbAr.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                selected_language = "ar";
-                                            }
-                                        }
-                );
-
-        binding.rbEn.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                selected_language = "en";
-                                            }
-                                        }
+        binding.rbAr.setOnClickListener((View.OnClickListener) v -> selected_language = "ar"
         );
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               activity.RefreshActivity(selected_language);
-                                           }
-                                       }
+
+        binding.rbEn.setOnClickListener((View.OnClickListener) v -> selected_language = "en"
+        );
+        binding.fab.setOnClickListener((View.OnClickListener) v -> activity.RefreshActivity(selected_language)
 
         );
     }

@@ -2,10 +2,12 @@ package com.endpoint.chooseme.tags;
 
 public class Tags {
 
-    public static String base_url = "http://e-brach.creativeshare.sa/";
-    public static final String IMAGE_URL = base_url+"upload/";
-
     public static final String session_login = "login";
     public static final String session_logout = "logout";
+
+    public static final String DATABASE_NAME = "ChooseAppDataBase";
+    public static final String TABLE_USER = "Users";
+
+
 
 }

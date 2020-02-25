@@ -1,22 +1,12 @@
 package com.endpoint.chooseme.general_ui_method;
 
-import android.net.Uri;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 
-
 import com.makeramen.roundedimageview.RoundedImageView;
-import com.squareup.picasso.Picasso;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 
 
 public class GeneralMethod {
@@ -33,6 +23,15 @@ public class GeneralMethod {
             tv.setError(error);
 
 
+        }
+    }
+
+    @BindingAdapter("imageResource")
+    public static void displayImageResource(View view, int resource) {
+        if (view instanceof RoundedImageView) {
+
+            RoundedImageView imageView = (RoundedImageView) view;
+            imageView.setImageResource(resource);
         }
     }
 

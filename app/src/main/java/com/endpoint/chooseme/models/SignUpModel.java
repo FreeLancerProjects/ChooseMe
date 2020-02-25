@@ -8,11 +8,14 @@ import android.widget.Toast;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
+import androidx.databinding.library.baseAdapters.BR;
 
 
-import com.endpoint.chooseme.BR;
 import com.endpoint.chooseme.R;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpModel extends BaseObservable implements Serializable {
 
@@ -21,6 +24,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
     private String phone;
     private String email;
     private String password;
+    private List<ServiceModel> serviceModelList;
 
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_phone_code = new ObservableField<>();
@@ -31,6 +35,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
 
     public SignUpModel() {
+        serviceModelList = new ArrayList<>();
         this.name = "";
         this.phone_code = "";
         this.phone = "";
@@ -39,7 +44,7 @@ public class SignUpModel extends BaseObservable implements Serializable {
     }
 
 
-    public SignUpModel(String name,  String phone_code, String phone, String email, String password) {
+    public SignUpModel(String name, String phone_code, String phone, String email, String password) {
         setName(name);
         setPhone_code(phone_code);
         setPhone(phone);
@@ -109,17 +114,23 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
     }
 
+    public List<ServiceModel> getServiceModelList() {
+        return serviceModelList;
+    }
 
-
-
+    public void setServiceModelList(List<ServiceModel> serviceModelList) {
+        this.serviceModelList = serviceModelList;
+    }
 
     public boolean isDataValid(Context context) {
         if (!TextUtils.isEmpty(phone_code) &&
                 !TextUtils.isEmpty(phone) &&
-                (password.length() >= 6)&&
-                !TextUtils.isEmpty(name) &&
-                ((!TextUtils.isEmpty(email) &&
-                        Patterns.EMAIL_ADDRESS.matcher(email).matches()) || TextUtils.isEmpty(email))
+                (password.length() >= 6) &&
+                !TextUtils.isEmpty(name) &&!TextUtils.isEmpty(email) &&
+                Patterns.EMAIL_ADDRESS.matcher(email).matches()&&
+                serviceModelList.size()>0
+
+
         ) {
             error_name.set(null);
             error_phone_code.set(null);
@@ -130,46 +141,44 @@ public class SignUpModel extends BaseObservable implements Serializable {
             return true;
         } else {
             if (name.isEmpty()) {
-                error_name.set(context.getString(R.string.field_req));
+                error_name.set(context.getString(R.string.field_required));
             } else {
                 error_name.set(null);
             }
 
 
-            if (email.isEmpty())
-            {
-                error_email.set(context.getString(R.string.field_req));
-            }
-            else   if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (email.isEmpty()) {
+                error_email.set(context.getString(R.string.field_required));
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 error_email.set(context.getString(R.string.inv_email));
-            }
-            else
-            {
+            } else {
                 error_email.set(null);
             }
             if (phone_code.isEmpty()) {
-                error_phone_code.set(context.getString(R.string.field_req));
+                error_phone_code.set(context.getString(R.string.field_required));
             } else {
                 error_phone_code.set(null);
             }
 
             if (phone.isEmpty()) {
-                error_phone.set(context.getString(R.string.field_req));
+                error_phone.set(context.getString(R.string.field_required));
             } else {
                 error_phone.set(null);
             }
 
             if (password.isEmpty()) {
-                error_password.set(context.getString(R.string.field_req));
+                error_password.set(context.getString(R.string.field_required));
             } else if (password.length() < 6) {
                 error_password.set(context.getString(R.string.pass_short));
-            }  else {
+            } else {
                 error_password.set(null);
 
             }
 
 
-
+            if (serviceModelList.size()==0) {
+                Toast.makeText(context, R.string.ch_serv, Toast.LENGTH_SHORT).show();
+            }
 
             return false;
         }

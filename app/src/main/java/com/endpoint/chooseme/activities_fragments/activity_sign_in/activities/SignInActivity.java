@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
-
 
 import com.endpoint.chooseme.R;
 import com.endpoint.chooseme.activities_fragments.activity_sign_in.fragments.Fragment_Language;
@@ -31,7 +29,7 @@ public class SignInActivity extends AppCompatActivity {
     private Fragment_Sign_In fragment_sign_in;
     private Fragment_Sign_Up fragment_sign_up;
     private Fragment_Language fragment_language;
-    private String cuurent_language;
+    private String lang;
     private Preferences preferences;
 
     @Override
@@ -58,7 +56,6 @@ public class SignInActivity extends AppCompatActivity {
                 DisplayFragmentSignIn();
 
             }
-          //  DisplayFragmentSignIn();
 
         }
 
@@ -68,7 +65,7 @@ public class SignInActivity extends AppCompatActivity {
     private void initView() {
         Paper.init(this);
         preferences = Preferences.newInstance();
-        cuurent_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         fragmentManager = this.getSupportFragmentManager();
 
     }

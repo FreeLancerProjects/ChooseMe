@@ -7,17 +7,15 @@ import android.util.Patterns;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
+import androidx.databinding.library.baseAdapters.BR;
 
 
-import com.endpoint.chooseme.BR;
-import com.endpoint.chooseme.R;
 import com.endpoint.chooseme.R;
 
 
 public class LoginModel extends BaseObservable {
 
     private String email;
-
     private String password;
     public ObservableField<String> error_email = new ObservableField<>();
     public ObservableField<String> error_password = new ObservableField<>();
@@ -43,7 +41,7 @@ public class LoginModel extends BaseObservable {
 
     public void setEmail(String email) {
         this.email = email;
-        notifyPropertyChanged(com.endpoint.chooseme.BR.email);
+        notifyPropertyChanged(BR.email);
 
 
     }
@@ -71,7 +69,7 @@ public class LoginModel extends BaseObservable {
             return true;
         } else {
             if (email.isEmpty()) {
-                error_email.set(context.getString(R.string.field_req));
+                error_email.set(context.getString(R.string.field_required));
             }
             else  if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 error_email.set(context.getString(R.string.inv_email));
@@ -83,7 +81,7 @@ public class LoginModel extends BaseObservable {
 
 
             if (password.isEmpty()) {
-                error_password.set(context.getString(R.string.field_req));
+                error_password.set(context.getString(R.string.field_required));
             } else if (password.length() < 6) {
                 error_password.set(context.getString(R.string.pass_short));
             } else {

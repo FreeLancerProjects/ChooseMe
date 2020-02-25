@@ -9,8 +9,8 @@ import android.view.animation.AnimationUtils;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-
 import com.endpoint.chooseme.R;
+import com.endpoint.chooseme.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.chooseme.activities_fragments.activity_sign_in.activities.SignInActivity;
 import com.endpoint.chooseme.databinding.ActivitySplashBinding;
 import com.endpoint.chooseme.language.LanguageHelper;
@@ -55,9 +55,9 @@ public class Splash_Activity extends AppCompatActivity {
                 String session = preferences.getSession(Splash_Activity.this);
                 if (session.equals(Tags.session_login))
                 {
-//                    Intent intent=new Intent(Splash_Activity.this, HomeActivity.class);
-//                    startActivity(intent);
-//                    finish();
+                    Intent intent=new Intent(Splash_Activity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
                 }else
                 {
                     Intent intent=new Intent(Splash_Activity.this, SignInActivity.class);

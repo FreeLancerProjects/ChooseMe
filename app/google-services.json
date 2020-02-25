@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "768659784347",
+    "firebase_url": "https://chooseapp-af26a.firebaseio.com",
+    "project_id": "chooseapp-af26a",
+    "storage_bucket": "chooseapp-af26a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768659784347:android:321dc70295c79546c33c3e",
+        "android_client_info": {
+          "package_name": "com.endpoint.chooseme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768659784347-rofcp6r214ok0v6kaumpud2sha22ffjk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQkjudc2W30uUQ_4YDX2VBFVYCrxp0fvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768659784347-rofcp6r214ok0v6kaumpud2sha22ffjk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

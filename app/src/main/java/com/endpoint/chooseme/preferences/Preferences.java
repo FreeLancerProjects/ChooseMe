@@ -3,13 +3,10 @@ package com.endpoint.chooseme.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
 import com.endpoint.chooseme.models.UserModel;
 import com.endpoint.chooseme.tags.Tags;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.Locale;
 
 public class Preferences {
@@ -25,21 +22,7 @@ public class Preferences {
         }
         return instance;
     }
-    public void saveVisitTime(Context context, String time)
-    {
-        SharedPreferences preferences = context.getSharedPreferences("visit", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("time",time);
-        editor.apply();
-    }
 
-
-
-    public String getVisitTime(Context context)
-    {
-        SharedPreferences preferences = context.getSharedPreferences("visit", Context.MODE_PRIVATE);
-        return preferences.getString("time","");
-    }
     public void create_update_language(Context context, String lang) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("language", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
