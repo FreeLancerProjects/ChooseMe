@@ -15,6 +15,7 @@ public class UserModel implements Serializable {
     private String whatsapp;
     private String facebook;
     private String price_in_hour;
+    private double rate;
     private List<ServiceModel> serviceModelList;
     private List<Works> worksList;
 
@@ -23,12 +24,13 @@ public class UserModel implements Serializable {
     }
 
 
-    public UserModel(String id, String name, String email, String phone, String password, String twitter, String linkedin, String whatsapp, String facebook, String price_in_hour, List<ServiceModel> serviceModelList, List<Works> worksList) {
+    public UserModel(String id, String name, String email, String phone, String password, String twitter, String linkedin, String whatsapp, String facebook, String price_in_hour,double rate, List<ServiceModel> serviceModelList, List<Works> worksList) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.rate = rate;
         this.twitter = twitter;
         this.linkedin = linkedin;
         this.whatsapp = whatsapp;
@@ -118,12 +120,22 @@ public class UserModel implements Serializable {
         this.price_in_hour = price_in_hour;
     }
 
+
+
     public List<ServiceModel> getServiceModelList() {
         return serviceModelList;
     }
 
     public void setServiceModelList(List<ServiceModel> serviceModelList) {
         this.serviceModelList = serviceModelList;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
     }
 
     public List<Works> getWorksList() {
@@ -138,18 +150,17 @@ public class UserModel implements Serializable {
     {
         private String image;
         private String price;
-        private double rate;
         private String title;
 
         public Works() {
         }
 
-        public Works(String image, String price, double rate, String title) {
+        public Works(String image, String price, String title) {
             this.image = image;
             this.price = price;
-            this.rate = rate;
             this.title = title;
         }
+
 
         public String getImage() {
             return image;
@@ -165,14 +176,6 @@ public class UserModel implements Serializable {
 
         public void setPrice(String price) {
             this.price = price;
-        }
-
-        public double getRate() {
-            return rate;
-        }
-
-        public void setRate(double rate) {
-            this.rate = rate;
         }
 
         public String getTitle() {

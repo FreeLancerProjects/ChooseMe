@@ -24,6 +24,7 @@ import com.endpoint.chooseme.databinding.ActivityHomeBinding;
 import com.endpoint.chooseme.language.LanguageHelper;
 import com.endpoint.chooseme.models.UserModel;
 import com.endpoint.chooseme.preferences.Preferences;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +40,8 @@ public class HomeActivity extends AppCompatActivity {
     private Fragment_Profile fragment_profile;
     private UserModel userModel;
     private Preferences preferences;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -65,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mAuth = FirebaseAuth.getInstance();
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
 
@@ -247,6 +251,20 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    public void logout()
+    {
+        if (userModel!=null)
+        {
+            mAuth.signOut();
+            preferences.clear(this);
+            userModel = null;
+            navigateToLogIn();
+        }else
+            {
+                navigateToLogIn();
+            }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -269,6 +287,19 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    public void refreshActivity(String selected_language) {
+        Paper.book().write("lang", selected_language);
+        LanguageHelper.setNewLocale(this, selected_language);
+        preferences.setIsLanguageSelected(this);
+
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+
+
+    }
+
     @Override
     public void onBackPressed() {
 
@@ -278,12 +309,17 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }else
                 {
-                    Intent intent = new Intent(this, SignInActivity.class);
-                    navigateUpTo(intent);
+                    navigateToLogIn();
                 }
         }else
             {
                 DisplayFragmentHome();
             }
+    }
+
+    private void navigateToLogIn() {
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -24,7 +24,7 @@
 
     <string name="share">مشاركة</string>
     <string name="edit">تعديل</string>
-    <string name="price">سعر</string>
+    <string name="price">السعر</string>
     <string name="delete">حذف</string>
 
     <string name="change_language">تغير اللغة</string>
@@ -63,6 +63,9 @@
     <string name="settings">الإعدادات</string>
     <string name="all">الكل</string>
     <string name="most_view">الاكثر مشهادة</string>
+    <string name="rate_app">تقييم</string>
+    <string name="logout">خروج</string>
+    <string name="no_image">لا توجد صورة</string>
 
 
 </resources>

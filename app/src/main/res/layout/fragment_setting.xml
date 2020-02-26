@@ -2,9 +2,294 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
-    <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <data>
+        <variable
+            name="action"
+            type="com.endpoint.chooseme.interfaces.Listeners.SettingActionListener" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:fillViewport="true"
+        android:background="@drawable/splash_bg"
+        >
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_primary_trans"
+            android:orientation="vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/logo2"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    >
+                    <LinearLayout
+                        android:id="@+id/llContact"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/small_rounded"
+                        android:onClick="@{()->action.contact()}"
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_contact"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginTop="5dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:text="@string/contact_us"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:gravity="center"
+                            android:lines="2"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llChangeLanguage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/small_rounded"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:onClick="@{()->action.changeLanguage()}"
+
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_language"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginTop="5dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:padding="5dp"
+
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:text="@string/change_language"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:gravity="center"
+                            android:lines="2"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llAbout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/small_rounded"
+                        android:onClick="@{()->action.about()}"
+
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_information"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginTop="5dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:padding="5dp"
+
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:text="@string/about_app"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:gravity="center"
+                            android:lines="2"
+
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginBottom="20dp"
+                    >
+                    <LinearLayout
+                        android:id="@+id/llRate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/small_rounded"
+                        android:onClick="@{()->action.rateApp()}"
+
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_star"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginTop="5dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:text="@string/rate_app"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:gravity="center"
+                            android:lines="2"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llTerms"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/small_rounded"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:onClick="@{()->action.terms()}"
+
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_terms"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginTop="5dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:padding="5dp"
+
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:text="@string/terms_and_conditions"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:gravity="center"
+                            android:lines="2"
+
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llLogout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/small_rounded"
+                        android:onClick="@{()->action.logout()}"
+
+                        >
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_logout"
+                            android:tint="@color/colorPrimary"
+                            android:layout_marginTop="5dp"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:padding="5dp"
+
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="5dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:text="@string/logout"
+                            android:clickable="false"
+                            android:longClickable="false"
+                            android:gravity="center"
+                            android:lines="2"
+
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </layout>

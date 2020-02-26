@@ -147,7 +147,7 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.CreateAccoun
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         String id = task.getResult().getUser().getUid();
-                        UserModel userModel = new UserModel(id,signUpModel.getName(),signUpModel.getEmail(),signUpModel.getPhone(),signUpModel.getPassword(),"","","","","",signUpModel.getServiceModelList(),new ArrayList<>());
+                        UserModel userModel = new UserModel(id,signUpModel.getName(),signUpModel.getEmail(),signUpModel.getPhone(),signUpModel.getPassword(),"","","","","",0.0,signUpModel.getServiceModelList(),new ArrayList<>());
                         saveInDataBase(userModel,dialog);
 
 

@@ -8,6 +8,9 @@ public class ServiceModel implements Serializable {
     private String name;
     private int image_resource;
 
+    public ServiceModel() {
+    }
+
     public ServiceModel(int id, String name) {
         this.id = id;
         this.name = name;

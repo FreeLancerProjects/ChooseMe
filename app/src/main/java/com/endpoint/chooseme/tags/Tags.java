@@ -7,6 +7,8 @@ public class Tags {
 
     public static final String DATABASE_NAME = "ChooseAppDataBase";
     public static final String TABLE_USER = "Users";
+    public static final String TABLE_SETTING = "Settings";
+    public static final String TABLE_Contact = "ContactUs";
 
 
 

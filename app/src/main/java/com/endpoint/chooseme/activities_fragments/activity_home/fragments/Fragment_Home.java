@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -14,8 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.endpoint.chooseme.R;
 import com.endpoint.chooseme.activities_fragments.activity_home.HomeActivity;
 import com.endpoint.chooseme.adapters.DepartmentAdapter;
+import com.endpoint.chooseme.adapters.UsersAdapter;
 import com.endpoint.chooseme.databinding.FragmentHomeBinding;
 import com.endpoint.chooseme.models.ServiceModel;
+import com.endpoint.chooseme.models.UserModel;
+import com.endpoint.chooseme.preferences.Preferences;
+import com.endpoint.chooseme.tags.Tags;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +36,13 @@ public class Fragment_Home extends Fragment {
     private FragmentHomeBinding binding;
     private HomeActivity activity;
     private String lang;
+    private UserModel userModel;
+    private Preferences preferences;
     private DepartmentAdapter departmentAdapter;
     private List<ServiceModel>serviceModelList;
+    private DatabaseReference dRef;
+    private List<UserModel> userModelList;
+    private UsersAdapter usersAdapter;
 
 
 
@@ -45,8 +60,12 @@ public class Fragment_Home extends Fragment {
     }
 
     private void initView() {
+        dRef = FirebaseDatabase.getInstance().getReference(Tags.DATABASE_NAME);
         serviceModelList = new ArrayList<>();
+        userModelList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
+        preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(activity);
         Paper.init(activity);
         lang = Paper.book().read("lang","ar");
         binding.progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -54,8 +73,68 @@ public class Fragment_Home extends Fragment {
         binding.recViewService.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false));
         departmentAdapter = new DepartmentAdapter(serviceModelList,activity,this);
         binding.recViewService.setAdapter(departmentAdapter);
+        binding.recViewUsers.setLayoutManager(new LinearLayoutManager(activity));
+        usersAdapter = new UsersAdapter(userModelList,activity,this);
+        binding.recViewUsers.setAdapter(usersAdapter);
+
+        binding.tvAll.setOnClickListener(view -> activity.DisplayFragmentDepartments());
+
+        getUsers();
 
 
+    }
+
+    private void getUsers() {
+        dRef.child(Tags.TABLE_USER)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        binding.progBar.setVisibility(View.GONE);
+                        if (dataSnapshot.getValue()!=null)
+                        {
+                            for (DataSnapshot ds :dataSnapshot.getChildren())
+                            {
+                                UserModel model = ds.getValue(UserModel.class);
+                                if (model!=null)
+                                {
+
+                                    if (userModel!=null)
+                                    {
+                                        if (!userModel.getId().equals(model.getId()))
+                                        {
+                                            userModelList.add(model);
+                                        }
+                                    }else
+                                        {
+                                            userModelList.add(model);
+
+                                        }
+
+                                }
+                            }
+
+                            if (userModelList.size()>0)
+                            {
+                                binding.tvUsersService.setVisibility(View.GONE);
+                                usersAdapter.notifyDataSetChanged();
+
+                            }else
+                                {
+                                    binding.tvUsersService.setVisibility(View.VISIBLE);
+
+                                }
+
+                        }else
+                            {
+                                binding.tvUsersService.setVisibility(View.VISIBLE);
+                            }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 
     private void addService() {

@@ -18,7 +18,8 @@
     <color name="gray7">#f8f8f8</color>
     <color name="transparent">#00000000</color>
     <color name="color_bg">#b0b5b9</color>
-
+    <color name="color_primary_trans">#aa00a79d</color>
+    <color name="rate">#f28c1b</color>
 
     <color name="secondColor">#32db64</color>
     <color name="endColor">#26A84D</color>

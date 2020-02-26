@@ -4,6 +4,11 @@ package com.endpoint.chooseme.interfaces;
 
 public interface Listeners {
 
+    interface BackListener
+    {
+        void back();
+    }
+
     interface SkipListener
     {
         void skip();
@@ -17,6 +22,18 @@ public interface Listeners {
     {
         void showDialog();
     }
+
+    interface SettingActionListener
+    {
+        void contact();
+        void changeLanguage();
+        void about();
+        void rateApp();
+        void terms();
+        void logout();
+    }
+
+
 
 
 
