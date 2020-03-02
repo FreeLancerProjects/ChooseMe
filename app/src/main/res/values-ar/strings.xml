@@ -66,6 +66,20 @@
     <string name="rate_app">تقييم</string>
     <string name="logout">خروج</string>
     <string name="no_image">لا توجد صورة</string>
+    <string name="price_in_hour">السعر في الساعة</string>
+    <string name="previous_work">الاعمال السابقة</string>
+    <string name="no_works_to_display">لا توجد أعمال لعرضها</string>
+    <string name="add">إضافة</string>
+    <string name="update_profile">تعديل الملف الشخصي</string>
+    <string name="facebook">الفيس بوك</string>
+    <string name="whatsapp">واتس اب</string>
+    <string name="twitter">تويتر</string>
+    <string name="linkedin">لينكد ان</string>
+    <string name="inv_phone">رقم جوال غير صحيح</string>
+    <string name="not_av">غير متاح الان</string>
+    <string name="title">العنوان</string>
+    <string name="perm_img_denied">الوصول الى الصور غير مسموح</string>
+    <string name="ch_img">إختر الصورة</string>
 
 
 </resources>

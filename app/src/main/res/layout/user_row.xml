@@ -6,10 +6,6 @@
         <variable
             name="model"
             type="com.endpoint.chooseme.models.UserModel" />
-        <variable
-            name="workModel"
-            type="com.endpoint.chooseme.models.UserModel.Works" />
-
         <import type="android.view.View"/>
     </data>
     <androidx.cardview.widget.CardView
@@ -40,7 +36,7 @@
                     app:riv_corner_radius_top_right="8dp"
                     app:riv_mutate_background="true"
                     android:background="@color/gray1"
-                    url='@{workModel!=null?workModel.image:""}'
+                    url='@{model.worksList.size()>0?(!model.worksList.get(0).image.isEmpty()?model.worksList.get(0).image:""):""}'
                     />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -48,7 +44,7 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:visibility="@{workModel!=null?View.GONE:View.VISIBLE,default=gone}"
+                    android:visibility="@{model.worksList!=null?(model.worksList.size()>0?(model.worksList.get(0).image.isEmpty()?View.VISIBLE:View.GONE):View.GONE):View.VISIBLE,default=gone}"
 
                     >
                     <ImageView
@@ -98,7 +94,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_gravity="center_horizontal"
-                android:text='@{workModel!=null?workModel.title:model.name}'
+                android:text='@{model.name}'
                 />
 
 
@@ -111,7 +107,7 @@
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_gravity="center_horizontal"
-                android:text='@{@string/price+" "+(model.price_in_hour.isEmpty()?"0.0":model.price_in_hour)+" "+@string/sar}'
+                android:text='@{@string/price+" "+model.price_in_hour+" "+@string/sar}'
 
                 />
 

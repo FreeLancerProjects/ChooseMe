@@ -14,11 +14,9 @@
             type="com.endpoint.chooseme.models.SignUpModel" />
 
         <variable
-            name="showCountryListener"
-            type="com.endpoint.chooseme.interfaces.Listeners.ShowCountryDialogListener" />
-        <variable
             name="signUpListener"
             type="com.endpoint.chooseme.interfaces.Listeners.CreateAccountListener" />
+
     </data>
 
     <ScrollView
@@ -177,14 +175,13 @@
                         android:layout_height="37dp"
                         android:layout_gravity="center_vertical"
                         android:gravity="center"
-                        android:hint="@string/code"
+                        android:hint="+966"
                         android:paddingLeft="5dp"
                         android:paddingRight="5dp"
                         android:singleLine="true"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/gray4"
+                        android:textColorHint="@color/black"
                         android:textSize="14sp"
-                        error="@{signUpModel.error_phone_code}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/icon"
                         app:layout_constraintTop_toTopOf="parent"
@@ -205,7 +202,6 @@
                         />
 
                     <EditText
-                        error="@{signUpModel.error_phone}"
                         android:layout_width="0dp"
                         android:layout_height="37dp"
                         android:layout_gravity="center_vertical"
@@ -215,14 +211,18 @@
                         android:hint="@string/phone"
                         android:inputType="phone"
                         android:singleLine="true"
-                        android:text="@={signUpModel.phone}"
                         android:textColor="@color/black"
                         android:textColorHint="@color/gray4"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/view2"
                         app:layout_constraintStart_toEndOf="@id/view"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:maxLength="9"
+                        android:text="@={signUpModel.phone}"
+                        error="@{signUpModel.error_phone}"
+
+                        />
 
                     <View
                         android:id="@+id/view2"
@@ -232,23 +232,9 @@
                         android:layout_marginBottom="5dp"
                         android:background="@color/gray4"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/image_phone_code"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/image_phone_code"
-                        android:layout_width="50dp"
-                        android:layout_height="37dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:onClick="@{()->showCountryListener.showDialog()}"
-                        android:padding="12dp"
-                        android:rotation='@{lang.equals("ar")?180:0}'
-                        android:src="@drawable/ic_right_arrow"
-                        android:tint="@color/colorPrimary"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

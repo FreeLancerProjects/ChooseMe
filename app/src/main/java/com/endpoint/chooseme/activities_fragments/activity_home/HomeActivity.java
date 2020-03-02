@@ -24,6 +24,7 @@ import com.endpoint.chooseme.databinding.ActivityHomeBinding;
 import com.endpoint.chooseme.language.LanguageHelper;
 import com.endpoint.chooseme.models.UserModel;
 import com.endpoint.chooseme.preferences.Preferences;
+import com.endpoint.chooseme.share.Common;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
@@ -105,7 +106,14 @@ public class HomeActivity extends AppCompatActivity {
                     DisplayFragmentSetting();
                     break;
                 case 3:
-                    DisplayFragmentProfile();
+                    if (userModel!=null)
+                    {
+                        DisplayFragmentProfile();
+
+                    }else
+                        {
+                            Common.CreateDialogAlert(this,getString(R.string.please_sign_in_or_sign_up));
+                        }
                     break;
 
 
@@ -306,10 +314,12 @@ public class HomeActivity extends AppCompatActivity {
         if (fragment_home!=null&&fragment_home.isVisible())
         {
             if (userModel==null){
-                finish();
+                navigateToLogIn();
             }else
+
                 {
-                    navigateToLogIn();
+                    finish();
+
                 }
         }else
             {
@@ -318,6 +328,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void navigateToLogIn() {
+
         Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
         finish();

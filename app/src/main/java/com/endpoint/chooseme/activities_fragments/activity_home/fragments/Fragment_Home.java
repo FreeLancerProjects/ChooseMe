@@ -1,5 +1,6 @@
 package com.endpoint.chooseme.activities_fragments.activity_home.fragments;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.endpoint.chooseme.R;
+import com.endpoint.chooseme.activities_fragments.activity_department_users.DepartmentUsersActivity;
 import com.endpoint.chooseme.activities_fragments.activity_home.HomeActivity;
+import com.endpoint.chooseme.activities_fragments.activity_profile.ProfileActivity;
 import com.endpoint.chooseme.adapters.DepartmentAdapter;
 import com.endpoint.chooseme.adapters.UsersAdapter;
 import com.endpoint.chooseme.databinding.FragmentHomeBinding;
@@ -78,6 +81,9 @@ public class Fragment_Home extends Fragment {
         binding.recViewUsers.setAdapter(usersAdapter);
 
         binding.tvAll.setOnClickListener(view -> activity.DisplayFragmentDepartments());
+
+
+
 
         getUsers();
 
@@ -158,4 +164,16 @@ public class Fragment_Home extends Fragment {
     }
 
 
+    public void setItemData(ServiceModel model) {
+        Intent intent = new Intent(activity, DepartmentUsersActivity.class);
+        intent.putExtra("data",model);
+        startActivity(intent);
+    }
+
+    public void setUserItemData(UserModel model) {
+
+        Intent intent = new Intent(activity, ProfileActivity.class);
+        intent.putExtra("data",model);
+        startActivity(intent);
+    }
 }

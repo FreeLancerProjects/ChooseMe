@@ -47,7 +47,10 @@ public class Department2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         MyHolder myHolder = (MyHolder) holder;
         ServiceModel model = list.get(position);
         myHolder.binding.setModel(model);
-
+        myHolder.itemView.setOnClickListener(view -> {
+            ServiceModel model2 = list.get(myHolder.getAdapterPosition());
+            fragment.setItemData(model2);
+        });
 
     }
 

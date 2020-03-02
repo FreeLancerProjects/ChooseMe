@@ -151,14 +151,16 @@ public class UserModel implements Serializable {
         private String image;
         private String price;
         private String title;
+        private double rate;
 
         public Works() {
         }
 
-        public Works(String image, String price, String title) {
+        public Works(String image, String price, String title,double rate) {
             this.image = image;
             this.price = price;
             this.title = title;
+            this.rate = rate;
         }
 
 
@@ -184,6 +186,14 @@ public class UserModel implements Serializable {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public double getRate() {
+            return rate;
+        }
+
+        public void setRate(double rate) {
+            this.rate = rate;
         }
     }
 }

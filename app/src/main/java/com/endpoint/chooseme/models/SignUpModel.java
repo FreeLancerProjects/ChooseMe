@@ -20,7 +20,6 @@ import java.util.List;
 public class SignUpModel extends BaseObservable implements Serializable {
 
     private String name;
-    private String phone_code;
     private String phone;
     private String email;
     private String password;
@@ -37,16 +36,14 @@ public class SignUpModel extends BaseObservable implements Serializable {
     public SignUpModel() {
         serviceModelList = new ArrayList<>();
         this.name = "";
-        this.phone_code = "";
         this.phone = "";
         this.password = "";
         this.email = "";
     }
 
 
-    public SignUpModel(String name, String phone_code, String phone, String email, String password) {
+    public SignUpModel(String name, String phone, String email, String password) {
         setName(name);
-        setPhone_code(phone_code);
         setPhone(phone);
         setEmail(email);
         setPassword(password);
@@ -67,16 +64,6 @@ public class SignUpModel extends BaseObservable implements Serializable {
 
     }
 
-    @Bindable
-    public String getPhone_code() {
-        return phone_code;
-    }
-
-    public void setPhone_code(String phone_code) {
-        this.phone_code = phone_code;
-        notifyPropertyChanged(BR.phone_code);
-
-    }
 
     @Bindable
 
@@ -123,8 +110,8 @@ public class SignUpModel extends BaseObservable implements Serializable {
     }
 
     public boolean isDataValid(Context context) {
-        if (!TextUtils.isEmpty(phone_code) &&
-                !TextUtils.isEmpty(phone) &&
+        if (!TextUtils.isEmpty(phone) &&
+                phone.length()==9&&
                 (password.length() >= 6) &&
                 !TextUtils.isEmpty(name) &&!TextUtils.isEmpty(email) &&
                 Patterns.EMAIL_ADDRESS.matcher(email).matches()&&
@@ -154,15 +141,14 @@ public class SignUpModel extends BaseObservable implements Serializable {
             } else {
                 error_email.set(null);
             }
-            if (phone_code.isEmpty()) {
-                error_phone_code.set(context.getString(R.string.field_required));
-            } else {
-                error_phone_code.set(null);
-            }
+
 
             if (phone.isEmpty()) {
                 error_phone.set(context.getString(R.string.field_required));
-            } else {
+            } else if (phone.length()!=9){
+                error_phone.set(context.getString(R.string.inv_phone));
+
+            }else {
                 error_phone.set(null);
             }
 

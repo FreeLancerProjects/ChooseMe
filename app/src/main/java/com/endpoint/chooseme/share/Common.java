@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -23,10 +22,8 @@ import android.widget.ProgressBar;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
-
 import com.endpoint.chooseme.R;
 import com.endpoint.chooseme.databinding.DialogAlertBinding;
-import com.endpoint.chooseme.databinding.DialogNotSignBinding;
 
 import java.io.File;
 
@@ -51,26 +48,6 @@ public class Common {
 
     }
 
-    public static void CreateNoSignAlertDialog(Context context) {
-        final AlertDialog dialog = new AlertDialog.Builder(context)
-                .create();
-
-        DialogNotSignBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_not_sign, null, false);
-
-        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
-                                                 @Override
-                                                 public void onClick(View v) {
-                                                     dialog.dismiss();
-                                                 }
-                                             }
-
-        );
-        //dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
-        //dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setView(binding.getRoot());
-        dialog.show();
-    }
 
     public static void CreateDialogAlert(Context context,String msg) {
         final AlertDialog dialog = new AlertDialog.Builder(context)
@@ -79,16 +56,11 @@ public class Common {
         DialogAlertBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_alert, null, false);
 
         binding.tvMsg.setText(msg);
-        binding.btnCancel.setOnClickListener(new View.OnClickListener() {
-                                                 @Override
-                                                 public void onClick(View v) {
-                                                     dialog.dismiss();
-                                                 }
-                                             }
+        binding.btnCancel.setOnClickListener(v -> dialog.dismiss()
 
         );
-     //   dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
-       // dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setView(binding.getRoot());
         dialog.show();

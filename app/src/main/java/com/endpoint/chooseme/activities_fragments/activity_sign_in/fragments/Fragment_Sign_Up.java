@@ -1,10 +1,8 @@
 package com.endpoint.chooseme.activities_fragments.activity_sign_in.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,20 +30,15 @@ import com.endpoint.chooseme.tags.Tags;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mukesh.countrypicker.Country;
-import com.mukesh.countrypicker.CountryPicker;
-import com.mukesh.countrypicker.listeners.OnCountryPickerListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Fragment_Sign_Up extends Fragment implements Listeners.CreateAccountListener, Listeners.ShowCountryDialogListener, OnCountryPickerListener {
+public class Fragment_Sign_Up extends Fragment implements Listeners.CreateAccountListener {
     private SignInActivity activity;
     private FragmentSignUpBinding binding;
-    private CountryPicker countryPicker;
     private Preferences preferences;
     private String lang;
     private SignUpModel signUpModel;
@@ -75,15 +68,13 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.CreateAccoun
         serviceModelList = new ArrayList<>();
         signUpModel = new SignUpModel();
         preferences = Preferences.newInstance();
-        binding.setLang(lang);
         binding.setSignUpListener(this);
-        binding.setShowCountryListener(this);
+        binding.setLang(lang);
         binding.setSignUpModel(signUpModel);
         binding.recViewservice.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
         adapter = new MyServiceAdapter(selectedServiceList, activity, this);
         binding.recViewservice.setAdapter(adapter);
 
-        createCountryDialog();
 
         addService();
 
@@ -147,7 +138,7 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.CreateAccoun
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         String id = task.getResult().getUser().getUid();
-                        UserModel userModel = new UserModel(id,signUpModel.getName(),signUpModel.getEmail(),signUpModel.getPhone(),signUpModel.getPassword(),"","","","","",0.0,signUpModel.getServiceModelList(),new ArrayList<>());
+                        UserModel userModel = new UserModel(id,signUpModel.getName(),signUpModel.getEmail(),signUpModel.getPhone(),signUpModel.getPassword(),"","","","","0.0",0.0,signUpModel.getServiceModelList(),new ArrayList<>());
                         saveInDataBase(userModel,dialog);
 
 
@@ -203,48 +194,8 @@ public class Fragment_Sign_Up extends Fragment implements Listeners.CreateAccoun
         return new Fragment_Sign_Up();
     }
 
-    private void createCountryDialog() {
-        countryPicker = new CountryPicker.Builder()
-                .canSearch(true)
-                .listener(this)
-                .theme(CountryPicker.THEME_NEW)
-                .with(activity)
-                .build();
 
-        TelephonyManager telephonyManager = (TelephonyManager) activity.getSystemService(Context.TELEPHONY_SERVICE);
 
-        if (countryPicker.getCountryFromSIM() != null) {
-            updatePhoneCode(countryPicker.getCountryFromSIM());
-        } else if (telephonyManager != null && countryPicker.getCountryByISO(telephonyManager.getNetworkCountryIso()) != null) {
-            updatePhoneCode(countryPicker.getCountryByISO(telephonyManager.getNetworkCountryIso()));
-        } else if (countryPicker.getCountryByLocale(Locale.getDefault()) != null) {
-            updatePhoneCode(countryPicker.getCountryByLocale(Locale.getDefault()));
-        } else {
-            String code = "+966";
-            binding.tvCode.setText(code);
-            signUpModel.setPhone_code(code);
-
-        }
-
-    }
-
-    @Override
-    public void showDialog() {
-
-        countryPicker.showDialog(activity);
-    }
-
-    @Override
-    public void onSelectCountry(Country country) {
-        updatePhoneCode(country);
-
-    }
-
-    private void updatePhoneCode(Country country) {
-        binding.tvCode.setText(country.getDialCode());
-        signUpModel.setPhone_code(country.getDialCode());
-
-    }
 
 
     public void setItemData(int pos) {

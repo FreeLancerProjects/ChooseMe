@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.chooseme.R;
+import com.endpoint.chooseme.activities_fragments.activity_department_users.DepartmentUsersActivity;
 import com.endpoint.chooseme.activities_fragments.activity_home.fragments.Fragment_Home;
 import com.endpoint.chooseme.databinding.UserRowBinding;
 import com.endpoint.chooseme.models.UserModel;
@@ -20,12 +23,14 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<UserModel> list;
     private Context context;
     private LayoutInflater inflater;
-    private Fragment_Home fragment;
-    public UsersAdapter(List<UserModel> list, Context context, Fragment_Home fragment) {
+    private Fragment fragment;
+    private AppCompatActivity appCompatActivity;
+    public UsersAdapter(List<UserModel> list, Context context, Fragment fragment) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.fragment = fragment;
+        appCompatActivity = (AppCompatActivity) context;
 
 
     }
@@ -47,12 +52,27 @@ public class UsersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         MyHolder myHolder = (MyHolder) holder;
         UserModel model = list.get(position);
         myHolder.binding.setModel(model);
-        if (model.getWorksList()!=null&&model.getWorksList().size()>0)
-        {
-            UserModel.Works works = model.getWorksList().get(0);
-            myHolder.binding.setWorkModel(works);
-        }
 
+
+
+        myHolder.itemView.setOnClickListener(view -> {
+            UserModel model2 = list.get(myHolder.getAdapterPosition());
+
+            if (fragment!=null&&fragment instanceof Fragment_Home)
+            {
+
+                Fragment_Home fragment_home = (Fragment_Home) fragment;
+                fragment_home.setUserItemData(model2);
+            }else if (fragment==null&&appCompatActivity instanceof DepartmentUsersActivity)
+            {
+                DepartmentUsersActivity activity = (DepartmentUsersActivity) appCompatActivity;
+                activity.setItemData(model2);
+            {
+
+            }
+            }
+
+        });
 
     }
 

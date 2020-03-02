@@ -9,23 +9,20 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.chooseme.R;
-import com.endpoint.chooseme.activities_fragments.activity_home.fragments.Fragment_Home;
-import com.endpoint.chooseme.databinding.DepartmentRowBinding;
-import com.endpoint.chooseme.models.ServiceModel;
+import com.endpoint.chooseme.databinding.WorksProfileRowBinding;
+import com.endpoint.chooseme.models.UserModel;
 
 import java.util.List;
 
-public class DepartmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class WorksProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<ServiceModel> list;
+    private List<UserModel.Works> list;
     private Context context;
     private LayoutInflater inflater;
-    private Fragment_Home fragment;
-    public DepartmentAdapter(List<ServiceModel> list, Context context, Fragment_Home fragment) {
+    public WorksProfileAdapter(List<UserModel.Works> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.fragment = fragment;
 
 
     }
@@ -35,7 +32,7 @@ public class DepartmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        DepartmentRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.department_row, parent, false);
+        WorksProfileRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.works_profile_row, parent, false);
         return new MyHolder(binding);
 
 
@@ -45,26 +42,20 @@ public class DepartmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         MyHolder myHolder = (MyHolder) holder;
-        ServiceModel model = list.get(position);
+        UserModel.Works model = list.get(position);
         myHolder.binding.setModel(model);
-
-        myHolder.itemView.setOnClickListener(view -> {
-            ServiceModel model2 = list.get(myHolder.getAdapterPosition());
-            fragment.setItemData(model2);
-        });
-
 
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return list!=null?list.size():0;
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        public DepartmentRowBinding binding;
+        public WorksProfileRowBinding binding;
 
-        public MyHolder(@NonNull DepartmentRowBinding binding) {
+        public MyHolder(@NonNull WorksProfileRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 
