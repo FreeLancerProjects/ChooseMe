@@ -147,8 +147,6 @@ public class Fragment_Sign_In extends Fragment implements Listeners.CreateAccoun
 
     @Override
     public void skip() {
-       Intent intent = new Intent(activity,HomeActivity.class);
-       startActivity(intent);
-
+       navigateToHomeActivity();
     }
 }

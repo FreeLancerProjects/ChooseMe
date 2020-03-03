@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.endpoint.chooseme.R;
+import com.endpoint.chooseme.activities_fragments.activity_home.fragments.Fragment_Profile;
 import com.endpoint.chooseme.databinding.WorksProfileRowBinding;
 import com.endpoint.chooseme.models.UserModel;
 
@@ -19,10 +20,12 @@ public class WorksProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<UserModel.Works> list;
     private Context context;
     private LayoutInflater inflater;
-    public WorksProfileAdapter(List<UserModel.Works> list, Context context) {
+    private Fragment_Profile fragment;
+    public WorksProfileAdapter(List<UserModel.Works> list, Context context,Fragment_Profile fragment) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
+        this.fragment = fragment;
 
 
     }
@@ -45,6 +48,10 @@ public class WorksProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         UserModel.Works model = list.get(position);
         myHolder.binding.setModel(model);
 
+        myHolder.binding.imageDelete.setOnClickListener(view -> {
+            UserModel.Works model2 = list.get(myHolder.getAdapterPosition());
+            fragment.setItemDelete(model2,myHolder.getAdapterPosition());
+        });
     }
 
     @Override

@@ -1,10 +1,10 @@
 package com.endpoint.chooseme.activities_fragments.activity_home.fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,11 @@ import com.endpoint.chooseme.databinding.FragmentProfileBinding;
 import com.endpoint.chooseme.models.ServiceModel;
 import com.endpoint.chooseme.models.UserModel;
 import com.endpoint.chooseme.preferences.Preferences;
+import com.endpoint.chooseme.share.Common;
+import com.endpoint.chooseme.tags.Tags;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +49,7 @@ public class Fragment_Profile extends Fragment {
     private SliderAdapter sliderAdapter;
     private TimerTask timerTask;
     private Timer timer;
+    private DatabaseReference dRef;
 
 
 
@@ -61,6 +67,7 @@ public class Fragment_Profile extends Fragment {
     }
 
     private void initView() {
+        dRef = FirebaseDatabase.getInstance().getReference(Tags.DATABASE_NAME).child(Tags.TABLE_USER);
         worksList = new ArrayList<>();
         activity = (HomeActivity) getActivity();
         Paper.init(activity);
@@ -70,14 +77,13 @@ public class Fragment_Profile extends Fragment {
         binding.setModel(userModel);
         if (userModel.getWorksList()!=null)
         {
-            Log.e("size",userModel.getWorksList().size()+"_");
 
             worksList.addAll(userModel.getWorksList());
 
            updateSliderAdapter();
         }
         binding.recView.setLayoutManager(new GridLayoutManager(activity,2));
-        adapter = new WorksProfileAdapter(worksList,activity);
+        adapter = new WorksProfileAdapter(worksList,activity,this);
         binding.recView.setAdapter(adapter);
 
         String service ="";
@@ -209,13 +215,63 @@ public class Fragment_Profile extends Fragment {
             if (userModel.getWorksList()!=null)
             {
                 worksList.addAll(userModel.getWorksList());
-                adapter = new WorksProfileAdapter(worksList,activity);
+                adapter = new WorksProfileAdapter(worksList,activity,this);
                 binding.recView.setAdapter(adapter);
                 updateSliderAdapter();
             }
 
 
         }
+    }
+
+    public void setItemDelete(UserModel.Works model, int adapterPosition) {
+        stopTimer();
+        ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        dialog.show();
+        FirebaseStorage.getInstance().getReferenceFromUrl(model.getImage())
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    deleteItemFromDatabase(dialog,adapterPosition);
+
+                }).addOnFailureListener(e -> {
+                    dialog.dismiss();
+                    if (e.getMessage()!=null)
+                    {
+                        Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }else
+                        {
+                            Toast.makeText(activity,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+                        }
+                });
+
+
+    }
+
+    private void deleteItemFromDatabase(ProgressDialog dialog, int adapterPosition) {
+
+        worksList.remove(adapterPosition);
+        userModel.setWorksList(worksList);
+
+
+        dRef.child(userModel.getId()).setValue(userModel)
+                .addOnSuccessListener(aVoid -> {
+                    dialog.dismiss();
+                    preferences.create_update_userdata(activity,userModel);
+                    binding.setModel(userModel);
+                    adapter.notifyDataSetChanged();
+                    updateSliderAdapter();
+                }).addOnFailureListener(e -> {
+                   dialog.dismiss();
+                   if (e.getMessage()!=null)
+                   {
+                       Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                   }else {
+                       Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                   }
+                });
+
     }
 
     private class MyTimerTask extends TimerTask{
